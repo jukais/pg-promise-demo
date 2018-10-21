@@ -1,6 +1,8 @@
+const path = require('path')
+
 const promise = require('bluebird')
 
-const createMigrationRepository = require('./repositories/migrations') // loading all repositories
+const createMigrationRepository = require('./repositories/migrations')
 const LOGGER = require('./logger')
 
 const initOptions = {
@@ -10,7 +12,7 @@ const initOptions = {
   }
 }
 
-const config = {
+const dbConfig = {
   host: 'localhost',
   port: 3434,
   database: 'pg',
@@ -18,12 +20,16 @@ const config = {
   password: 'pg'
 }
 
+const migrationConfig = {
+  migrationsDir: path.resolve(__dirname, '../JavaScript/migrations'),
+}
+
 const diagnostics = require('./diagnostics')
 diagnostics.init(initOptions)
 
 const run = async () => {
   const pgp = require('pg-promise')(initOptions)
-  const db = pgp(config)
+  const db = pgp(dbConfig)
   try {
     await db.migrations.create()
   } catch (err) {

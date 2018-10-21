@@ -15,6 +15,8 @@ const sql = (
   }
 
   const qf = new QueryFile(fullPath, options)
+  
+  console.dir(qf, {depth: 10})
 
   if (qf.error) {
     LOGGER.error(qf.error)
@@ -23,10 +25,4 @@ const sql = (
   return qf
 }
 
-module.exports = params => {
-  return {
-    create: sql('migrations/create.sql', params),
-    add: sql('migrations/add.sql', params),
-    update: sql('migrations/update.sql', params)
-  }
-}
+module.exports = sql
