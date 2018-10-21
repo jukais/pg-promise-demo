@@ -17,19 +17,9 @@ class UsersRepository {
         createColumnsets(pgp);
     }
 
-    // Creates the table;
-    create() {
-        return this.db.none(sql.create);
-    }
-
     // Initializes the table with some user records, and return their id-s;
     init() {
         return this.db.map(sql.init, [], row => row.id);
-    }
-
-    // Drops the table;
-    drop() {
-        return this.db.none(sql.drop);
     }
 
     // Removes all records from the table;

@@ -1,9 +1,9 @@
-'use strict';
+'use strict'
 
-const db = require('./db');
+const db = require('./db')
 
-const express = require('express');
-const app = express();
+const express = require('express')
+const app = express()
 
 // NOTE: We implement only GET handlers here, because:
 //
@@ -14,74 +14,60 @@ const app = express();
 // Users Web API
 //////////////////////////////////////////////
 
-// create table Users:
-GET('/users/create', () => db.users.create());
-
 // add some initial records:
-GET('/users/init', () => db.users.init());
+GET('/users/init', () => db.users.init())
 
 // remove all records from the table:
-GET('/users/empty', () => db.users.empty());
-
-// drop the table:
-GET('/users/drop', () => db.users.drop());
+GET('/users/empty', () => db.users.empty())
 
 // add a new user, if it doesn't exist yet, and return the object:
 GET('/users/add/:name', req => {
-    return db.task('add-user', t => {
-        return t.users.findByName(req.params.name)
-            .then(user => {
-                return user || t.users.add(req.params.name);
-            });
-    });
-});
+  return db.task('add-user', t => {
+    return t.users.findByName(req.params.name).then(user => {
+      return user || t.users.add(req.params.name)
+    })
+  })
+})
 
 // find a user by id:
-GET('/users/find/:id', req => db.users.findById(req.params.id));
+GET('/users/find/:id', req => db.users.findById(req.params.id))
 
 // remove a user by id:
-GET('/users/remove/:id', req => db.users.remove(req.params.id));
+GET('/users/remove/:id', req => db.users.remove(req.params.id))
 
 // get all users:
-GET('/users/all', () => db.users.all());
+GET('/users/all', () => db.users.all())
 
 // count all users:
-GET('/users/total', () => db.users.total());
+GET('/users/total', () => db.users.total())
 
 //////////////////////////////////////////////
 // Products Web API
 //////////////////////////////////////////////
 
-// create table Products:
-GET('/products/create', () => db.products.create());
-
-// drop the table:
-GET('/products/drop', () => db.products.drop());
-
 // remove all products:
-GET('/products/empty', () => db.products.empty());
+GET('/products/empty', () => db.products.empty())
 
 // add a new user product, if it doesn't exist yet, and return the object:
 GET('/products/add/:userId/:name', req => {
-    return db.task('add-product', t => {
-        return t.products.find(req.params)
-            .then(product => {
-                return product || t.products.add(req.params);
-            });
-    });
-});
+  return db.task('add-product', t => {
+    return t.products.find(req.params).then(product => {
+      return product || t.products.add(req.params)
+    })
+  })
+})
 
 // find a product by user id + product name id:
-GET('/products/find/:userId/:name', req => db.products.find(req.params));
+GET('/products/find/:userId/:name', req => db.products.find(req.params))
 
 // remove a product by id:
-GET('/products/remove/:id', req => db.products.remove(req.params.id));
+GET('/products/remove/:id', req => db.products.remove(req.params.id))
 
 // get all products:
-GET('/products/all', () => db.products.all());
+GET('/products/all', () => db.products.all())
 
 // count all products:
-GET('/products/total', () => db.products.total());
+GET('/products/total', () => db.products.total())
 
 /////////////////////////////////////////////
 // Express/server part;
@@ -89,25 +75,25 @@ GET('/products/total', () => db.products.total());
 
 // Generic GET handler;
 function GET(url, handler) {
-    app.get(url, (req, res) => {
-        handler(req)
-            .then(data => {
-                res.json({
-                    success: true,
-                    data
-                });
-            })
-            .catch(error => {
-                res.json({
-                    success: false,
-                    error: error.message || error
-                });
-            });
-    });
+  app.get(url, (req, res) => {
+    handler(req)
+      .then(data => {
+        res.json({
+          success: true,
+          data
+        })
+      })
+      .catch(error => {
+        res.json({
+          success: false,
+          error: error.message || error
+        })
+      })
+  })
 }
 
-const port = 3000;
+const port = 3000
 
 app.listen(port, () => {
-    console.log('\nReady for GET requests on http://localhost:' + port);
-});
+  console.log('\nReady for GET requests on http://localhost:' + port)
+})

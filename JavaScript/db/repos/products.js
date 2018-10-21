@@ -17,16 +17,6 @@ class ProductsRepository {
         createColumnsets(pgp);
     }
 
-    // Creates the table;
-    create() {
-        return this.db.none(sql.create);
-    }
-
-    // Drops the table;
-    drop() {
-        return this.db.none(sql.drop);
-    }
-
     // Removes all records from the table;
     empty() {
         return this.db.none(sql.empty);

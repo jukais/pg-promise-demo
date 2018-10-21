@@ -28,9 +28,10 @@ const initOptions = {
 // Database connection parameters:
 const config = {
     host: 'localhost',
-    port: 5432,
-    database: 'pg-promise-demo',
-    user: 'postgres'
+    port: 3434,
+    database: 'pg',
+    user: 'pg',
+    password: 'pg'
 };
 
 // Load and initialize pg-promise:

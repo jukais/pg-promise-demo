@@ -1,0 +1,10 @@
+version: '3.1'
+
+services:
+  demo_db:
+    image: postgres:10-alpine
+    ports:
+      - 3434:5432
+    environment:
+      POSTGRES_PASSWORD: pg
+      POSTGRES_USER: pg
