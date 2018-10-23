@@ -1,9 +1,10 @@
-const path = require('path')
+const path = require("path")
 
-const promise = require('bluebird')
+const promise = require("bluebird")
+const enumSql = require("pg-promise").utils.enumSql
 
-const createMigrationRepository = require('./repositories/migrations')
-const LOGGER = require('./logger')
+const createMigrationRepository = require("./repositories/migrations")
+const LOGGER = require("./logger")
 
 const initOptions = {
   promiseLib: promise,
@@ -13,22 +14,34 @@ const initOptions = {
 }
 
 const dbConfig = {
-  host: 'localhost',
+  host: "localhost",
   port: 3434,
-  database: 'pg',
-  user: 'pg',
-  password: 'pg'
+  database: "pg",
+  user: "pg",
+  password: "pg"
 }
 
 const migrationConfig = {
-  migrationsDir: path.resolve(__dirname, '../JavaScript/migrations'),
+  migrationsDir: path.resolve(__dirname, "../JavaScript/migrations")
 }
 
-const diagnostics = require('./diagnostics')
+const tree = enumSql(
+  migrationConfig.migrationsDir,
+  { recursive: true },
+  (file, name, path) => {
+    console.log(file)
+    console.log(name)
+    console.log(path)
+    return file //new pgp.QueryFile(file, { minify: true })
+  }
+)
+console.log(tree)
+
+const diagnostics = require("./diagnostics")
 diagnostics.init(initOptions)
 
 const run = async () => {
-  const pgp = require('pg-promise')(initOptions)
+  const pgp = require("pg-promise")(initOptions)
   const db = pgp(dbConfig)
   try {
     await db.migrations.create()

@@ -1,7 +1,7 @@
-const parseSqls = require('../sql/parseSqls')
+const buildSqlModule = require('../sql/buildSqlModule')
 
 const createMigrationRepository = (db, params) => {
-  const sqls = parseSqls(params)
+  const sqls = buildSqlModule(params)
 
   return {
     create: () => db.none(sqls.create)
