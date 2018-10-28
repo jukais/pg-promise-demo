@@ -2,23 +2,21 @@ const QueryFile = require("pg-promise").QueryFile
 const LOGGER = require("../logger")
 
 const enumSql = require("pg-promise").utils.enumSql
+const MIGRATION_LOGBOOK_TABLE = "__migrations__"
 
 const load = (
   file,
   params = {
-    migrationTable: "__migrations__"
+    migrationTable: MIGRATION_LOGBOOK_TABLE
   }
 ) => {
   const options = {
     params
   }
-
   const qf = new QueryFile(file, options)
-
   if (qf.error) {
     LOGGER.error(qf.error)
   }
-
   return qf
 }
 

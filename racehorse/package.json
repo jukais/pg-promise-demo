@@ -1,0 +1,45 @@
+{
+  "name": "racehorse",
+  "version": "0.0.1",
+  "description": "Simple database migration tool based on pg-promise",
+  "main": "JavaScript/index.js",
+  "homepage": "https://github.com/jukais/racehorse",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jukais/racehorse.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jukais/racehorse/issues",
+    "email": "xxx@gmail.com"
+  },
+  "keywords": [
+    "pg-promise",
+    "racehorse",
+    "migration",
+    "postgres",
+    "sql"
+  ],
+  "author": {
+    "name": "xxx",
+    "email": "xxx@gmail.com"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=8.0.0",
+    "npm": ">=6.0.0"
+  },
+  "scripts": {
+    "watch": "DATABASE_URL=postgres://postgres:postgres@localhost:3434/postgres nodemon ./src/racehorse.js"
+  },
+  "dependencies": {
+    "bluebird": "3.5.2",
+    "pg-connection-string": "^2.0.0",
+    "pg-monitor": "1.1.0",
+    "pg-promise": "8.5.1"
+  },
+  "devDependencies": {
+    "@types/node": "10.12.0",
+    "nodemon": "^1.18.5",
+    "typescript": "3.1.3"
+  }
+}
