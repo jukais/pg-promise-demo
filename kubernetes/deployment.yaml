@@ -71,6 +71,7 @@ spec:
             claimName: postgres-pv-claim
 
 ---
+# Only for development. Exposes postgres to world
 kind: Service
 apiVersion: v1
 metadata:
