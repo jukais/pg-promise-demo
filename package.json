@@ -29,7 +29,8 @@
     "bluebird": "3.5.2",
     "express": "4.16.4",
     "pg-monitor": "1.1.0",
-    "pg-promise": "8.5.1"
+    "pg-promise": "8.5.1",
+    "racehorse": "file:racehorse"
   },
   "devDependencies": {
     "@types/node": "10.12.0",
